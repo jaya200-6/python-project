@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>You Guessed {{ score }} / {{ total }} Correctly!</h1>
+        <h2>Correct Answers:</h2>
+        <table border="1">
+            <tr><th>State/UT</th><th>Correct Capital</th></tr>
+            {% for state, capital in correct_answers %}
+            <tr><td>{{ state }}</td><td>{{ capital }}</td></tr>
+            {% endfor %}
+        </table>
+        <a href="/"><button>Play Again</button></a>
+    </div>
+</body>
+</html>

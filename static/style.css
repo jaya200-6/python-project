@@ -1,0 +1,115 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff9933, #ffffff, #138808); /* Saffron, White, Green gradient */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #ff9933; /* Saffron */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #138808; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0f6206; /* Darker green */
+    transform: scale(1.05);
+}
+
+a button {
+    text-decoration: none;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+table, th, td {
+    border: 2px solid #138808;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border: 2px solid #ff9933;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 150px;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #0f6206;
+    box-shadow: 0 0 5px rgba(19, 136, 8, 0.5);
+}
+
+#map {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+.overlay-table {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #ff9933;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+#timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
+    color: blue;
+    font-weight: bold;
+    margin-top: 20px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess Phase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <p class="timer" id="timer">Study time left: 0:30</p>
+    <div class="container">
+        <h1>Guess the Correct Capitals (4 Minutes)</h1>
+        <p>Study the blank map for 30 seconds, then start guessing.</p>
+        <img src="{{ url_for('static', filename='blank_map.jpg') }}" alt="India Blank Map" class="blank-map">
+        <div class="guess-table">
+            <form id="guessForm" action="/result" method="post">
+                <table border="1">
+                    <tr><th>State/UT</th><th>Wrong Capital</th><th>Your Guess for Correct Capital</th></tr>
+                    {% for state, wrong_capital in paired %}
+                    <tr>
+                        <td>{{ state }}</td>
+                        <td>{{ wrong_capital }}</td>
+                        <td><input type="text" name="{{ state }}" required></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <button type="submit">Submit Guesses</button>
+            </form>
+        </div>
+        <button id="startGuessing" style="display: none;">Start Guessing Now</button>
+    </div>
+    <script>
+        let guessTimeLeft = 240; // 4 minutes total
+        let mapStudyTime = 30; // 30 seconds to study the map
+        const timerElement = document.getElementById('timer');
+        const guessTable = document.querySelector('.guess-table');
+        const startGuessingButton = document.getElementById('startGuessing');
+
+        // Initial map study timer
+        let mapTimer = setInterval(() => {
+            mapStudyTime--;
+            timerElement.innerText = `Study time left: ${Math.floor(mapStudyTime / 60)}:${mapStudyTime % 60 < 10 ? '0' + mapStudyTime % 60 : mapStudyTime % 60}`;
+            if (mapStudyTime <= 0) {
+                clearInterval(mapTimer);
+                guessTable.style.display = 'block';
+                startGuessingButton.style.display = 'none';
+                startGuessTimer();
+            }
+        }, 1000);
+
+        // Optional: Allow manual start
+        startGuessingButton.addEventListener('click', () => {
+            clearInterval(mapTimer);
+            guessTable.style.display = 'block';
+            startGuessingButton.style.display = 'none';
+            startGuessTimer();
+        });
+
+        function startGuessTimer() {
+            timerElement.innerText = `Guess time left: ${Math.floor(guessTimeLeft / 60)}:${guessTimeLeft % 60 < 10 ? '0' + guessTimeLeft % 60 : guessTimeLeft % 60}`;
+            let countdown = setInterval(() => {
+                guessTimeLeft--;
+                timerElement.innerText = `Guess time left: ${Math.floor(guessTimeLeft / 60)}:${guessTimeLeft % 60 < 10 ? '0' + guessTimeLeft % 60 : guessTimeLeft % 60}`;
+                if (guessTimeLeft < 0) {
+                    clearInterval(countdown);
+                    alert("Time's up!");
+                    document.getElementById('guessForm').submit();
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

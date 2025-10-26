@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memorization Phase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1><center>Memorize the States and Capitals</center></h1>
+        <img src="{{ url_for('static', filename='map.jpeg') }}" alt="India Map with States and Capitals" width="800" id="map">
+        <table border="1">
+            <tr><th>State/UT</th><th>Capital</th></tr>
+            {% for state, capital in states.items() %}
+            <tr>
+                <td>{{ state }}</td>
+                <td>{{ capital }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p id="timer">Time left: 2:00</p>
+    </div>
+    <script>
+        let timeLeft = 120; // 2 minutes
+        const timerElement = document.getElementById('timer');
+        const countdown = setInterval(() => {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerElement.innerText = `Time left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            timeLeft--;
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                window.location.href = "/guess";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
